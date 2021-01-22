@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 转义和反转义工具类
  * @author: ZhouWei
- * @create: 2020-12
+ * @create: 2021-01
  **/
 public class EscapeUtil {
 

@@ -16,7 +16,7 @@ import java.util.Random;
 /**
  * 验证码工具类
  * @author: ZhouWei
- * @create: 2020-12
+ * @create: 2021-01
  **/
 public class RandomValidateCodeUtil {
 

@@ -9,7 +9,7 @@ import java.util.SimpleTimeZone;
 /**
  * 操作日期工具类
  * @author: ZhouWei
- * @create: 2020-12
+ * @create: 2021-01
  **/
 public class DateUtil {
     public final static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";

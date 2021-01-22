@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: admin-service-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr:  localhost:8848
+        namespace: 130e1b6-admin-e200l-a2e7-c807e2d9dev
+#        namespace: 130e1b6-admin-e260l-b4f9-104d95ftest
+#        namespace: 130e1b6-admin-e300l-c6g1-12c81580pre
+#        namespace: 130e1b6-admin-e350l-d7h2-15ecd1bprod
+      config:
+        server-addr: localhost:8848
+        namespace: 130e1b6-admin-e200l-a2e7-c807e2d9dev
+#        namespace: 130e1b6-admin-e260l-b4f9-104d95ftest
+#        namespace: 130e1b6-admin-e300l-c6g1-12c81580pre
+#        namespace: 130e1b6-admin-e350l-d7h2-15ecd1bprod
+        prefix: admin-service-gateway
+        file-extension: yaml
+        group: BASE

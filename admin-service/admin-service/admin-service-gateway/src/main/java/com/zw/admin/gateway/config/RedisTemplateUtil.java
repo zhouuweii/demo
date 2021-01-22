@@ -1,4 +1,4 @@
-package com.zw.admin.system.config;
+package com.zw.admin.gateway.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundListOperations;
@@ -6,7 +6,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -76,12 +75,12 @@ public class RedisTemplateUtil {
      * @param key 可以传一个值 或多个
      */
     @SuppressWarnings("unchecked")
-    public void delete(String... key) {
+    public void del(String... key) {
         if (key != null && key.length > 0) {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
             } else {
-                redisTemplate.delete((Collection<String>) CollectionUtils.arrayToList(key));
+                redisTemplate.delete(CollectionUtils.arrayToList(key));
             }
         }
     }
