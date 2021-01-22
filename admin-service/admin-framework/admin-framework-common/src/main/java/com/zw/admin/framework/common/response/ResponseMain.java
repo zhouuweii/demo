@@ -8,6 +8,7 @@ package com.zw.admin.framework.common.response;
 public interface ResponseMain {
 
     /**
+     *
      * 操作是否成功,true为成功，false操作失败
      * @return boolean
      **/
