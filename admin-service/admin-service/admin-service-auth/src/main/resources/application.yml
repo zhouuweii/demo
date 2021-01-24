@@ -1,0 +1,13 @@
+auth:
+  tokenValiditySeconds: 5184000
+  clientId: AdminWebApp
+  clientSecret: XcWebApp
+  cookieDomain: localhost
+  #  cookieDomain: 172.16.17.124
+  cookieMaxAge: -1
+encrypt:
+  key-store:
+    location: classpath:/admin.keystore
+    secret: adminkeystore
+    alias: adminkey
+    password: adminkeypass

@@ -13,14 +13,15 @@ import java.io.Serializable;
 public enum CommonCode implements ResponseMain, Serializable {
 
     //操作成功
-    SUCCESS(true, 1000, "操作成功！"),
+    SUCCESS(true, 200, "操作成功！"),
 
     //基本错误
     UNAUTHENTICATED(false, 2001, "此操作需要登陆系统！"),
     UNAUTHENTICATED_COOKIE(false, 2002, "认证失败！缺少cookie！"),
     UNAUTHENTICATED_TOKEN(false, 2003, "认证失败！缺少token！"),
     UNAUTHENTICATED_EXPIRE(false, 2004, "认证过期！"),
-    UNAUTHORISE(false, 2005, "权限不足，无权操作！"),
+    UNAUTHENTICATED_ERROR(false, 2005, "认证失败，无此用户！"),
+    UNAUTHORISE(false, 2006, "权限不足，无权操作！"),
 
     //调用失败
     FAIL(false, 3001, "操作失败！"),

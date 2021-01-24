@@ -40,7 +40,7 @@
         <swagger-bootstrap-ui.version>1.9.3</swagger-bootstrap-ui.version><!--Swagger Bootstrap UI-->
         <!--工具-->
         <lombok.version>1.18.2</lombok.version><!--精简代码-->
-        <fastjson.version>1.2.57</fastjson.version><!--序列化工具-->
+        <fastjson.version>1.2.75</fastjson.version><!--序列化工具-->
         <jackson.version>2.11.3</jackson.version><!--jackson工具-->
         <jakarta.validation.version>2.0.2</jakarta.validation.version> <!-- validation -->
         <guava.version>24.0-jre</guava.version><!--字符串、集合、并发库、I/O等工具类-->

@@ -12,16 +12,16 @@ import java.io.Serializable;
  **/
 @Data
 @ToString
-public class ResultData extends ResponseResult implements Serializable {
+public class ResultData<T> extends ResponseResult implements Serializable {
 
-    private Object data;
+    private T data;
 
     public ResultData() {
     }
 
-    public ResultData(ResponseMain responseMain, Object object) {
+    public ResultData(ResponseMain responseMain, T data) {
         super(responseMain);
-        this.data = object;
+        this.data = data;
     }
 
 }

@@ -44,13 +44,13 @@ public class MenuController {
     }
 
     /**
-     * 获取路由信息
+     * 获取路由信息-根据用户ID
      * @param
      * @return com.zw.admin.framework.common.response.ResultData
      **/
-    @ApiOperation("获取路由信息Test")
-    @GetMapping("getRoutersTest")
-    public ResultData getRoutersTest(Long userId) {
+    @ApiOperation("获取路由信息-根据用户ID")
+    @GetMapping("getRoutersById")
+    public ResultData getRoutersById(Long userId) {
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return new ResultData(CommonCode.SUCCESS, menus);
     }

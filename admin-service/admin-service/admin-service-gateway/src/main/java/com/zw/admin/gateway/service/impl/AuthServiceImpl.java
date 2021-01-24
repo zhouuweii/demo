@@ -1,10 +1,8 @@
 package com.zw.admin.gateway.service.impl;
 
 import com.zw.admin.framework.common.utils.CookieUtil;
-import com.zw.admin.gateway.config.RedisTemplateUtil;
 import com.zw.admin.gateway.service.AuthService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +15,6 @@ import java.util.Map;
  **/
 @Service
 public class AuthServiceImpl implements AuthService {
-
-    @Autowired
-    private RedisTemplateUtil redisTemplateUtil;
 
     /**
      * 从cookie查询身份令牌
@@ -42,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
      * @return java.lang.String
      **/
     @Override
-    public String getJwtFromHeader(ServerHttpRequest request) {
+    public String getTokenByHeader(ServerHttpRequest request) {
         //header标头
         String authorization = request.getHeaders().getFirst("Authorization");
         if (StringUtils.isEmpty(authorization)) {
@@ -54,17 +49,5 @@ public class AuthServiceImpl implements AuthService {
         //取到jwt令牌
         String jwt = authorization.substring(7);
         return jwt;
-    }
-
-    /**
-     * 从Redis取出jwt的有效期
-     * @param access_token 身份令牌
-     * @return long
-     **/
-    @Override
-    public long getExpire(String access_token) {
-        String key = "user_token:"+access_token;
-        long expire = redisTemplateUtil.getExpire(key);
-        return expire;
     }
 }

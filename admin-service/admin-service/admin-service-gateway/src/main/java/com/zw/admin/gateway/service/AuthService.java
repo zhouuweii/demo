@@ -21,13 +21,6 @@ public interface AuthService {
      * @param request 请求头
      * @return java.lang.String
      **/
-    public String getJwtFromHeader(ServerHttpRequest request);
-
-    /**
-     * 从Redis取出jwt的有效期
-     * @param access_token 身份令牌
-     * @return long
-     **/
-    public long getExpire(String access_token);
+    public String getTokenByHeader(ServerHttpRequest request);
 
 }

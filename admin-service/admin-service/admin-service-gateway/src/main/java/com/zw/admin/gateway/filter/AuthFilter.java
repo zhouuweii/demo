@@ -1,10 +1,14 @@
 package com.zw.admin.gateway.filter;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zw.admin.framework.common.constant.CacheConstants;
 import com.zw.admin.framework.common.response.CommonCode;
 import com.zw.admin.framework.common.response.ResponseResult;
+import com.zw.admin.framework.common.utils.ServletUtils;
 import com.zw.admin.framework.common.utils.StringUtils;
+import com.zw.admin.framework.core.service.RedisService;
 import com.zw.admin.gateway.config.IgnoreWhiteProperties;
 import com.zw.admin.gateway.service.AuthService;
 import lombok.Data;
@@ -13,6 +17,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -20,6 +25,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -32,12 +39,18 @@ import java.nio.charset.StandardCharsets;
 public class AuthFilter implements GlobalFilter, Ordered {
 
     @Autowired
+    private RedisService redisService;
+
+    @Resource(name = "stringRedisTemplate")
+    private ValueOperations<String, String> sops;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
     private AuthService authService;
 
-    /**放行白名单配置*/
+    /**放行白名单配置,NaCos自行添加*/
     @Autowired
     private IgnoreWhiteProperties ignoreWhite;
 
@@ -55,22 +68,32 @@ public class AuthFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
         //从cookie查询身份令牌
-        ServerHttpRequest request = exchange.getRequest();
-//        String tokenFromCookie = authService.getTokenFromCookie(request);
+//        String tokenFromCookie = authService.getTokenFromCookie(exchange.getRequest());
 //        if (StringUtils.isEmpty(tokenFromCookie)) {
 //            return this.access_denied(exchange, CommonCode.UNAUTHENTICATED_COOKIE);
 //        }
-        //从header标头取出jwt令牌
-        String jwtFromHeader = authService.getJwtFromHeader(request);
-        if (StringUtils.isEmpty(jwtFromHeader)) {
+        //从Header标头取出令牌
+        String token = authService.getTokenByHeader(exchange.getRequest());
+        if (StringUtils.isEmpty(token)) {
             return this.access_denied(exchange, CommonCode.UNAUTHENTICATED_TOKEN);
         }
-        //从Redis取出jwt的有效期
-//        long expire = authService.getExpire(tokenFromCookie);
-//        if (expire < 0) {
-//            return this.access_denied(exchange, CommonCode.UNAUTHENTICATED_EXPIRE);
-//        }
-        return chain.filter(exchange);
+        //从Redis取出Token
+        String userStr = sops.get(CacheConstants.LOGIN_TOKEN_KEY + token);
+        if (StringUtils.isNull(userStr)) {
+            return this.access_denied(exchange, CommonCode.UNAUTHENTICATED_EXPIRE);
+        }
+        //设置用户id、username
+        JSONObject json = JSONObject.parseObject(userStr);
+        String userid = json.getString("userid");
+        String username = json.getString("username");
+        if (StringUtils.isBlank(userid) || StringUtils.isBlank(username)) {
+            return this.access_denied(exchange, CommonCode.UNAUTHENTICATED_ERROR);
+        }
+        // 设置用户信息到请求
+        ServerHttpRequest mutableReq = exchange.getRequest().mutate().header(CacheConstants.DETAILS_USER_ID, userid)
+                .header(CacheConstants.DETAILS_USERNAME, ServletUtils.urlEncode(username)).build();
+        ServerWebExchange mutableExchange = exchange.mutate().request(mutableReq).build();
+        return chain.filter(mutableExchange);
     }
 
     /**

@@ -8,8 +8,8 @@ import java.util.Set;
 
 /**
  * 用户信息
- *
- * @author ruoyi
+ * @author: ZhouWei
+ * @create: 2021-01
  */
 public class LoginUser implements Serializable {
 

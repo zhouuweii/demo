@@ -4,7 +4,6 @@ import com.zw.admin.framework.common.constant.CacheConstants;
 import com.zw.admin.framework.common.utils.text.Convert;
 
 import javax.servlet.http.HttpServletRequest;
-
 /**
  * 权限获取工具类
  * @author: ZhouWei
@@ -24,6 +23,9 @@ public class SecurityUtils {
      * 获取用户ID
      */
     public static Long getUserId() {
+        HttpServletRequest request = ServletUtils.getRequest();
+        String header = request.getHeader("user_id");
+        System.out.println(header);
         return Convert.toLong(ServletUtils.getRequest().getHeader(CacheConstants.DETAILS_USER_ID));
     }
 
