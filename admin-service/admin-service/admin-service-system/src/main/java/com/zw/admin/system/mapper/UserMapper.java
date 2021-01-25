@@ -1,12 +1,14 @@
 package com.zw.admin.system.mapper;
 
 import com.zw.admin.framework.domain.entity.SysUser;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 用户
  * @author: ZhouWei
  * @create: 2021-01
  **/
+@Mapper
 public interface UserMapper {
 
     /**

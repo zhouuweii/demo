@@ -25,4 +25,9 @@ public class CacheConstants {
     /**授权信息字段*/
     public static final String AUTHORIZATION_HEADER = "authorization";
 
+    /**字典管理 cache key*/
+    public static final String SYS_DICT_KEY = "sys_dict:";
+
+    /**字典管理 cache key*  1天*/
+    public static final Long SYS_DICT_KEY_TIME = 60*2L;
 }

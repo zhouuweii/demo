@@ -8,7 +8,7 @@ import com.zw.admin.framework.common.exception.ExceptionCast;
 import com.zw.admin.framework.common.response.ResultData;
 import com.zw.admin.framework.common.utils.ServletUtils;
 import com.zw.admin.framework.common.utils.ip.IpUtils;
-import com.zw.admin.framework.core.service.RedisService;
+import com.zw.admin.framework.core.service.RedisTemplateUtil;
 import com.zw.admin.framework.domain.code.AuthCode;
 import com.zw.admin.framework.domain.model.AuthToken;
 import com.zw.admin.framework.domain.model.LoginUser;
@@ -48,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
     private RestTemplate restTemplate;
 
     @Autowired
-    private RedisService redisService;
+    private RedisTemplateUtil redisTemplateUtil;
 
     @Value("${auth.tokenValiditySeconds}")
     private long tokenValiditySeconds;
@@ -83,7 +83,7 @@ public class AuthServiceImpl implements AuthService {
         userInfo.setIpaddr(IpUtils.getIpAddr(ServletUtils.getRequest()));
         //将令牌存储到Redis
         String key =  CacheConstants.LOGIN_TOKEN_KEY + authToken.getJti();
-        redisService.setCacheObject(key, userInfo, tokenValiditySeconds, TimeUnit.SECONDS);
+        redisTemplateUtil.setCacheObject(key, userInfo, tokenValiditySeconds, TimeUnit.SECONDS);
         return authToken;
     }
 

@@ -2,13 +2,14 @@ package com.zw.admin.system.service.impl;
 
 import com.zw.admin.framework.common.utils.IdUtils;
 import com.zw.admin.framework.common.utils.verification.RandomValidateCodeUtil;
-import com.zw.admin.system.config.RedisTemplateUtil;
+import com.zw.admin.framework.core.service.RedisTemplateUtil;
 import com.zw.admin.system.service.OtherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description:
@@ -29,7 +30,7 @@ public class OtherServiceImpl implements OtherService {
         String encoded = randCode.get("encoded");
         // 保存验证码信息
         String uuid = IdUtils.simpleUUID();
-        boolean set = redisTemplateUtil.set("register:" + uuid, code,60*2);
+        redisTemplateUtil.setCacheObject("register:" + uuid, code,2L, TimeUnit.MINUTES);
         Map<String,String> result =new HashMap<>();
         result.put("image",encoded);
         result.put("uuid",code);

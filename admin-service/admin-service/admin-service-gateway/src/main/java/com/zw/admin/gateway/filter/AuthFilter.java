@@ -8,7 +8,6 @@ import com.zw.admin.framework.common.response.CommonCode;
 import com.zw.admin.framework.common.response.ResponseResult;
 import com.zw.admin.framework.common.utils.ServletUtils;
 import com.zw.admin.framework.common.utils.StringUtils;
-import com.zw.admin.framework.core.service.RedisService;
 import com.zw.admin.gateway.config.IgnoreWhiteProperties;
 import com.zw.admin.gateway.service.AuthService;
 import lombok.Data;
@@ -37,9 +36,6 @@ import java.nio.charset.StandardCharsets;
 @Data
 @Component
 public class AuthFilter implements GlobalFilter, Ordered {
-
-    @Autowired
-    private RedisService redisService;
 
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<String, String> sops;

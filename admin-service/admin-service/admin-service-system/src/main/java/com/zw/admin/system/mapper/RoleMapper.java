@@ -1,6 +1,7 @@
 package com.zw.admin.system.mapper;
 
 import com.zw.admin.framework.domain.entity.SysRole;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author: ZhouWei
  * @create: 2021-01
  **/
+@Mapper
 public interface RoleMapper {
 
     /**

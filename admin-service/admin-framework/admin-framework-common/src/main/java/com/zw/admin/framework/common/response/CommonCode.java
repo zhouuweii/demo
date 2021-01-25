@@ -50,6 +50,12 @@ public enum CommonCode implements ResponseMain, Serializable {
     DATA_NOT_EXISTS_USER(false, 4102, "此用户不存在"),
     DATA_PHONE_CODE_ERROR(false, 4103, "验证码错误"),
 
+    DATA_NO_DELETE(false, 4500, "该类型已分配,不能删除"),
+    DATA_ALREADY_EXISTS_DIC(false, 4501, "新增字典失败，该字典类型已存在"),
+    DATA_ALREADY_EXISTS_DIC_UPDATE(false, 4502, "修改字典失败，该字典类型已存在"),
+
+
+
     //通用错误
     SERVER_ERROR(false, 9999, "抱歉，系统繁忙，请稍后重试！");
 

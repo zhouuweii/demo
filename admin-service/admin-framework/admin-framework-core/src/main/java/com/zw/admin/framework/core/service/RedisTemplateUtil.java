@@ -17,18 +17,17 @@ import java.util.concurrent.TimeUnit;
  **/
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 @Component
-public class RedisService {
+public class RedisTemplateUtil {
 
     @Autowired
     public RedisTemplate redisTemplate;
 
-    public RedisService(RedisTemplate redisTemplate) {
+    public RedisTemplateUtil(RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
     /**
      * 缓存基本的对象，Integer、String、实体类等
-     *
      * @param key 缓存的键值
      * @param value 缓存的值
      */
@@ -38,7 +37,16 @@ public class RedisService {
 
     /**
      * 缓存基本的对象，Integer、String、实体类等
-     *
+     * @param key 缓存的键值
+     * @param value 缓存的值
+     * @param timeout 时间/秒
+     */
+    public <T> void setCacheObject(final String key, final T value, final Long timeout) {
+        redisTemplate.opsForValue().set(key, value, timeout);
+    }
+
+    /**
+     * 缓存基本的对象，Integer、String、实体类等
      * @param key 缓存的键值
      * @param value 缓存的值
      * @param timeout 时间
