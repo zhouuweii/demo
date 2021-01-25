@@ -1,6 +1,7 @@
 package com.zw.admin.system;
 
-import org.mybatis.spring.annotation.MapperScan;
+import com.zw.admin.framework.core.annotation.EnableCustomConfig;
+import com.zw.admin.framework.core.annotation.EnableRyFeignClients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -12,9 +13,11 @@ import org.springframework.context.annotation.ComponentScan;
  * @author: ZhouWei
  * @create: 2021-01
  **/
+@EnableCustomConfig
+@EnableRyFeignClients
 @EnableFeignClients
 @EnableDiscoveryClient
-@MapperScan("com.zw.admin.system.mapper")
+//@MapperScan("com.zw.admin.system.mapper")
 @ComponentScan(basePackages = {"com.zw.admin"})
 @SpringBootApplication()
 public class SystemApplication {

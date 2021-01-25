@@ -10,6 +10,7 @@ import com.zw.admin.framework.common.utils.SecurityUtils;
 import com.zw.admin.framework.common.utils.poi.ExcelUtil;
 import com.zw.admin.framework.common.web.controller.BaseController;
 import com.zw.admin.framework.common.web.domain.AjaxResult;
+import com.zw.admin.framework.core.annotation.PreAuthorize;
 import com.zw.admin.framework.domain.entity.SysDictType;
 import com.zw.admin.system.service.DictTypeService;
 import io.swagger.annotations.Api;
@@ -65,7 +66,7 @@ public class DictTypeController extends BaseController {
      * @param dictId 字典类型ID
      * @return 字典类型信息
      */
-//    @PreAuthorize(hasPermi = "system:dict:query")
+    @PreAuthorize(hasPermi = "system:dict:query")
     @ApiOperation("查询详情-根据字典类型ID")
     @GetMapping(value = "/{dictId}")
     public ResultData getInfo(@PathVariable Long dictId) {

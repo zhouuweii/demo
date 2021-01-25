@@ -1,6 +1,7 @@
 package com.zw.admin.framework.common.exception;
 
 import com.google.common.collect.ImmutableMap;
+import com.zw.admin.framework.common.exceptions.PreAuthorizeException;
 import com.zw.admin.framework.common.response.CommonCode;
 import com.zw.admin.framework.common.response.ResponseMain;
 import com.zw.admin.framework.common.response.ResponseResult;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 统一异常捕获类
+ * 全局异常捕获类
  * @author: ZhouWei
  * @create: 2021-01
  **/
@@ -30,9 +31,10 @@ public class ExceptionCatch {
         builder.put(HttpMessageNotReadableException.class, CommonCode.PARAM_INVALID);
     }
 
-    /**捕获CustomException此类异常
-     * @param customException
-     * @return com.zw.admin.common.common.response.ResponseResult
+    /**
+     * 捕获CustomException此类异常
+     * @param customException 自定义异常类型
+     * @return com.zw.admin.framework.common.response.ResponseResult
      **/
     @ExceptionHandler(CustomException.class)
     @ResponseBody
@@ -43,9 +45,24 @@ public class ExceptionCatch {
         return new ResponseResult(responseMain);
     }
 
-    /**捕获Exception此类异常
+    /**
+     * 捕获preAuthorizeException此类异常
+     * @param preAuthorizeException 权限异常
+     * @return com.zw.admin.framework.common.response.ResponseResult
+     **/
+    @ExceptionHandler(PreAuthorizeException.class)
+    @ResponseBody
+    public ResponseResult preAuthorizeException(PreAuthorizeException preAuthorizeException) {
+        System.out.println("没有权限，请联系管理员授权");
+        //记录日志
+        LOGGER.error("catch exception:{}", preAuthorizeException.getMessage());
+        return new ResponseResult(CommonCode.UNAUTHORISE);
+    }
+
+    /**
+     * 捕获Exception此类异常
      * @param exception
-     * @return com.zw.admin.common.common.response.ResponseResult
+     * @return com.zw.admin.framework.common.response.ResponseResult
      **/
     @ExceptionHandler(Exception.class)
     @ResponseBody

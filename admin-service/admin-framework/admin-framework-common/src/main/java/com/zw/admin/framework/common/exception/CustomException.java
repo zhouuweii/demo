@@ -19,4 +19,6 @@ public class CustomException extends RuntimeException {
     public ResponseMain getResultCode() {
         return this.responseMain;
     }
+
+
 }

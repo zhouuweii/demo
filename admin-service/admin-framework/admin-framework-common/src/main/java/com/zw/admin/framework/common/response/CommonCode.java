@@ -16,6 +16,7 @@ public enum CommonCode implements ResponseMain, Serializable {
     SUCCESS(true, 200, "操作成功！"),
 
     //基本错误
+    UNAUTHENTICATED_(false, 2000, "没有权限，请联系管理员授权！"),
     UNAUTHENTICATED(false, 2001, "此操作需要登陆系统！"),
     UNAUTHENTICATED_COOKIE(false, 2002, "认证失败！缺少cookie！"),
     UNAUTHENTICATED_TOKEN(false, 2003, "认证失败！缺少token！"),
