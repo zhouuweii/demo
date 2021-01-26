@@ -10,7 +10,9 @@ import com.zw.admin.framework.common.utils.SecurityUtils;
 import com.zw.admin.framework.common.utils.poi.ExcelUtil;
 import com.zw.admin.framework.common.web.controller.BaseController;
 import com.zw.admin.framework.common.web.domain.AjaxResult;
+import com.zw.admin.framework.core.annotation.Log;
 import com.zw.admin.framework.core.annotation.PreAuthorize;
+import com.zw.admin.framework.core.enums.BusinessType;
 import com.zw.admin.framework.domain.entity.SysDictType;
 import com.zw.admin.system.service.DictTypeService;
 import io.swagger.annotations.Api;
@@ -41,7 +43,8 @@ public class DictTypeController extends BaseController {
      * @param dictType 字典类型信息
      * @return 字典类型集合信息
      **/
-//    @PreAuthorize(hasPermi = "system:dict:list")
+    @Log(title = "字典类型", businessType = BusinessType.QUERY)
+    @PreAuthorize(hasPermi = "system:dict:list")
     @ApiOperation("列表查询")
     @GetMapping("/list")
     public ResultData list(SysDictType dictType) {
@@ -54,6 +57,7 @@ public class DictTypeController extends BaseController {
      * 获取字典选择框列表
      * @return 所有字典类型集合信息
      **/
+    @Log(title = "字典类型", businessType = BusinessType.QUERY)
     @GetMapping("/optionselect")
     @ApiOperation("获取所有字典类型")
     public ResultData optionSelect() {
@@ -79,7 +83,7 @@ public class DictTypeController extends BaseController {
      * @param dict 字典类型信息
      * @return 结果
      */
-//    @PreAuthorize(hasPermi = "system:dict:add")
+    @PreAuthorize(hasPermi = "system:dict:add")
 //    @Log(title = "字典类型", businessType = BusinessType.INSERT)
     @ApiOperation("新增字典类型")
     @PostMapping
@@ -96,7 +100,7 @@ public class DictTypeController extends BaseController {
      * @param dict 字典类型信息
      * @return 结果
      */
-//    @PreAuthorize(hasPermi = "system:dict:edit")
+    @PreAuthorize(hasPermi = "system:dict:edit")
 //    @Log(title = "字典类型", businessType = BusinessType.UPDATE)
     @ApiOperation("修改保存字典类型信息")
     @PutMapping
@@ -113,7 +117,7 @@ public class DictTypeController extends BaseController {
      * @param dictIds 需要删除的字典ID
      * @return 结果
      */
-//    @PreAuthorize(hasPermi = "system:dict:remove")
+    @PreAuthorize(hasPermi = "system:dict:remove")
 //    @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @ApiOperation("批量删除字典信息")
     @DeleteMapping("/{dictIds}")
@@ -124,7 +128,7 @@ public class DictTypeController extends BaseController {
     /**
      * 清空缓存
      */
-//    @PreAuthorize(hasPermi = "system:dict:remove")
+    @PreAuthorize(hasPermi = "system:dict:remove")
 //    @Log(title = "字典类型", businessType = BusinessType.CLEAN)
     @ApiOperation("清空缓存数据")
     @DeleteMapping("/clearCache")
@@ -133,8 +137,9 @@ public class DictTypeController extends BaseController {
         return AjaxResult.success();
     }
 
+
+    @PreAuthorize(hasPermi = "system:dict:export")
     //    @Log(title = "字典类型", businessType = BusinessType.EXPORT)
-//    @PreAuthorize(hasPermi = "system:dict:export")
     @ApiOperation("导出数据")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysDictType dictType) throws IOException {

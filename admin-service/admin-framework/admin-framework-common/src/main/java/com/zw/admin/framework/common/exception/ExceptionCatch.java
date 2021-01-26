@@ -1,7 +1,6 @@
 package com.zw.admin.framework.common.exception;
 
 import com.google.common.collect.ImmutableMap;
-import com.zw.admin.framework.common.exceptions.PreAuthorizeException;
 import com.zw.admin.framework.common.response.CommonCode;
 import com.zw.admin.framework.common.response.ResponseMain;
 import com.zw.admin.framework.common.response.ResponseResult;

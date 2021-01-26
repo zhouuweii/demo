@@ -1,5 +1,6 @@
 package com.zw.admin.system;
 
+import com.zw.admin.framework.api.service.RemoteLogService;
 import com.zw.admin.framework.core.annotation.EnableCustomConfig;
 import com.zw.admin.framework.core.annotation.EnableRyFeignClients;
 import org.springframework.boot.SpringApplication;
@@ -15,9 +16,8 @@ import org.springframework.context.annotation.ComponentScan;
  **/
 @EnableCustomConfig
 @EnableRyFeignClients
-@EnableFeignClients
+@EnableFeignClients(clients = RemoteLogService.class)
 @EnableDiscoveryClient
-//@MapperScan("com.zw.admin.system.mapper")
 @ComponentScan(basePackages = {"com.zw.admin"})
 @SpringBootApplication()
 public class SystemApplication {

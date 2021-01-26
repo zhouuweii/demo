@@ -18,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * token验证处理
- * 
- * @author ruoyi
+ * @author: ZhouWei
+ * @create: 2021-01
  */
 @Component
 public class TokenService

@@ -1,7 +1,9 @@
 package com.zw.admin.auth;
 
+import com.zw.admin.framework.core.annotation.EnableRyFeignClients;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -14,10 +16,12 @@ import org.springframework.web.client.RestTemplate;
  * @author: ZhouWei
  * @create: 2021-01
  **/
+
+@EnableRyFeignClients
+@EnableFeignClients(basePackages = {"com.zw.admin.*"})
 @EnableDiscoveryClient
-@EnableFeignClients
 @ComponentScan(basePackages = {"com.zw.admin"})
-@SpringBootApplication
+@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
 public class AuthApplication {
 
     public static void main(String[] args) {

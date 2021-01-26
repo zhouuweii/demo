@@ -1,6 +1,6 @@
 package com.zw.admin.framework.core.aspect;
 
-import com.zw.admin.framework.common.exceptions.PreAuthorizeException;
+import com.zw.admin.framework.common.exception.PreAuthorizeException;
 import com.zw.admin.framework.core.annotation.PreAuthorize;
 import com.zw.admin.framework.core.service.TokenService;
 import com.zw.admin.framework.domain.model.LoginUser;
@@ -22,8 +22,8 @@ import java.util.Set;
 
 /**
  * 自定义权限实现
- *
- * @author ruoyi
+ * @author: ZhouWei
+ * @create: 2021-01
  */
 @Aspect
 @Component

@@ -1,4 +1,4 @@
-package com.zw.admin.framework.common.exceptions;
+package com.zw.admin.framework.common.exception;
 
 /**
  * 权限异常

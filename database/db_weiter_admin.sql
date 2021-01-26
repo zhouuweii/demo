@@ -11,7 +11,7 @@
  Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 22/01/2021 12:49:52
+ Date: 26/01/2021 14:02:52
 */
 
 SET NAMES utf8mb4;
@@ -203,7 +203,7 @@ CREATE TABLE `sys_config`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_config
@@ -232,7 +232,7 @@ CREATE TABLE `sys_dept`  (
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`dept_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 110 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dept
@@ -268,7 +268,7 @@ CREATE TABLE `sys_dict_data`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -306,6 +306,7 @@ INSERT INTO `sys_dict_data` VALUES (30, 2, '密码模式', 'password', 'sys_gran
 INSERT INTO `sys_dict_data` VALUES (31, 3, '客户端模式', 'client_credentials', 'sys_grant_type', '', '', 'N', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '客户端模式');
 INSERT INTO `sys_dict_data` VALUES (32, 4, '简化模式', 'implicit', 'sys_grant_type', '', '', 'N', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '简化模式');
 INSERT INTO `sys_dict_data` VALUES (33, 5, '刷新模式', 'refresh_token', 'sys_grant_type', '', '', 'N', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '刷新模式');
+INSERT INTO `sys_dict_data` VALUES (34, 0, '123', '123', 'sys_grant_type', NULL, NULL, 'N', '0', 'admin', '2021-01-25 14:30:15', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict_type
@@ -323,21 +324,21 @@ CREATE TABLE `sys_dict_type`  (
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_id`) USING BTREE,
   UNIQUE INDEX `dict_type`(`dict_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_dict_type
 -- ----------------------------
-INSERT INTO `sys_dict_type` VALUES (1, '用户性别', 'sys_user_sex', '0', 'admin', '2021-01-21 11:33:00', 'ry', '2018-03-16 11:33:00', '用户性别列表');
-INSERT INTO `sys_dict_type` VALUES (2, '菜单状态', 'sys_show_hide', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '菜单状态列表');
-INSERT INTO `sys_dict_type` VALUES (3, '系统开关', 'sys_normal_disable', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '系统开关列表');
+INSERT INTO `sys_dict_type` VALUES (1, '人物性别', 'sys_user_sex', '0', 'admin', '2021-01-25 15:01:37', 'admin', '2021-01-25 15:20:01', '人物性别列表');
+INSERT INTO `sys_dict_type` VALUES (2, '菜单状态', 'sys_show_hide', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2021-01-25 14:23:51', '菜单状态列表');
+INSERT INTO `sys_dict_type` VALUES (3, '系统开关', 'sys_normal_disable', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2021-01-25 14:23:57', '系统开关列表');
 INSERT INTO `sys_dict_type` VALUES (4, '任务状态', 'sys_job_status', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '任务状态列表');
 INSERT INTO `sys_dict_type` VALUES (5, '任务分组', 'sys_job_group', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '任务分组列表');
 INSERT INTO `sys_dict_type` VALUES (6, '系统是否', 'sys_yes_no', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '系统是否列表');
 INSERT INTO `sys_dict_type` VALUES (7, '通知类型', 'sys_notice_type', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '通知类型列表');
 INSERT INTO `sys_dict_type` VALUES (8, '通知状态', 'sys_notice_status', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '通知状态列表');
 INSERT INTO `sys_dict_type` VALUES (9, '操作类型', 'sys_oper_type', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '操作类型列表');
-INSERT INTO `sys_dict_type` VALUES (10, '系统状态', 'sys_common_status', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '登录状态列表');
+INSERT INTO `sys_dict_type` VALUES (10, '系统状态', 'sys_common_status', '0', 'admin', '2018-03-16 11:33:00', 'admin', '2021-01-25 15:20:28', '登录状态列表');
 INSERT INTO `sys_dict_type` VALUES (11, '授权类型', 'sys_grant_type', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '授权类型列表');
 
 -- ----------------------------
@@ -359,7 +360,7 @@ CREATE TABLE `sys_job`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注信息',
   PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_job
@@ -400,7 +401,7 @@ CREATE TABLE `sys_logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '提示信息',
   `access_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -430,7 +431,7 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1066 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -535,7 +536,7 @@ CREATE TABLE `sys_notice`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_notice
@@ -565,11 +566,14 @@ CREATE TABLE `sys_oper_log`  (
   `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oper_log
 -- ----------------------------
+INSERT INTO `sys_oper_log` VALUES (1, '字典类型', 1, 'com.zw.admin.system.controller.DictTypeController.list()', 'GET', 1, 'admin', NULL, '/dict/type/list', '127.0.0.1', '', NULL, '{\"code\":200,\"data\":{\"rows\":[{\"createBy\":\"admin\",\"createTime\":1611558097000,\"dictId\":1,\"dictName\":\"人物性别\",\"dictType\":\"sys_user_sex\",\"params\":{},\"remark\":\"人物性别列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":2,\"dictName\":\"菜单状态\",\"dictType\":\"sys_show_hide\",\"params\":{},\"remark\":\"菜单状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":3,\"dictName\":\"系统开关\",\"dictType\":\"sys_normal_disable\",\"params\":{},\"remark\":\"系统开关列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":4,\"dictName\":\"任务状态\",\"dictType\":\"sys_job_status\",\"params\":{},\"remark\":\"任务状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":5,\"dictName\":\"任务分组\",\"dictType\":\"sys_job_group\",\"params\":{},\"remark\":\"任务分组列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":6,\"dictName\":\"系统是否\",\"dictType\":\"sys_yes_no\",\"params\":{},\"remark\":\"系统是否列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":7,\"dictName\":\"通知类型\",\"dictType\":\"sys_notice_type\",\"params\":{},\"remark\":\"通知类型列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":8,\"dictName\":\"通知状态\",\"dictType\":\"sys_notice_status\",\"params\":{},\"remark\":\"通知状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":9,\"dictName\":\"操作类型\",\"dictType\":\"sys_oper_type\",\"params\":{},\"remark\":\"操作类型列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":10,\"dictName\":\"系统状态\",\"dictType\":\"sys_common_status\",\"params\":{},\"remark\":\"登录状态列表\",\"status\":\"0\"}],\"total\":11},\"message\":\"操作成功！\",\"success\":true} ', 0, NULL, '2021-01-26 13:00:15');
+INSERT INTO `sys_oper_log` VALUES (2, '字典类型', 1, 'com.zw.admin.system.controller.DictTypeController.list()', 'GET', 1, 'admin', NULL, '/dict/type/list', '127.0.0.1', '', NULL, '{\"code\":200,\"data\":{\"rows\":[{\"createBy\":\"admin\",\"createTime\":1611558097000,\"dictId\":1,\"dictName\":\"人物性别\",\"dictType\":\"sys_user_sex\",\"params\":{},\"remark\":\"人物性别列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":2,\"dictName\":\"菜单状态\",\"dictType\":\"sys_show_hide\",\"params\":{},\"remark\":\"菜单状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":3,\"dictName\":\"系统开关\",\"dictType\":\"sys_normal_disable\",\"params\":{},\"remark\":\"系统开关列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":4,\"dictName\":\"任务状态\",\"dictType\":\"sys_job_status\",\"params\":{},\"remark\":\"任务状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":5,\"dictName\":\"任务分组\",\"dictType\":\"sys_job_group\",\"params\":{},\"remark\":\"任务分组列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":6,\"dictName\":\"系统是否\",\"dictType\":\"sys_yes_no\",\"params\":{},\"remark\":\"系统是否列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":7,\"dictName\":\"通知类型\",\"dictType\":\"sys_notice_type\",\"params\":{},\"remark\":\"通知类型列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":8,\"dictName\":\"通知状态\",\"dictType\":\"sys_notice_status\",\"params\":{},\"remark\":\"通知状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":9,\"dictName\":\"操作类型\",\"dictType\":\"sys_oper_type\",\"params\":{},\"remark\":\"操作类型列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":10,\"dictName\":\"系统状态\",\"dictType\":\"sys_common_status\",\"params\":{},\"remark\":\"登录状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":11,\"dictName\":\"授权类型\",\"dictType\":\"sys_grant_type\",\"params\":{},\"remark\":\"授权类型列表\",\"status\":\"0\"}],\"total\":11},\"message\":\"操作成功！\",\"success\":true}', 0, NULL, '2021-01-26 13:24:17');
+INSERT INTO `sys_oper_log` VALUES (3, '字典类型', 1, 'com.zw.admin.system.controller.DictTypeController.list()', 'GET', 1, 'admin', NULL, '/dict/type/list', '127.0.0.1', '', NULL, '{\"code\":200,\"data\":{\"rows\":[{\"createBy\":\"admin\",\"createTime\":1611558097000,\"dictId\":1,\"dictName\":\"人物性别\",\"dictType\":\"sys_user_sex\",\"params\":{},\"remark\":\"人物性别列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":2,\"dictName\":\"菜单状态\",\"dictType\":\"sys_show_hide\",\"params\":{},\"remark\":\"菜单状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":3,\"dictName\":\"系统开关\",\"dictType\":\"sys_normal_disable\",\"params\":{},\"remark\":\"系统开关列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":4,\"dictName\":\"任务状态\",\"dictType\":\"sys_job_status\",\"params\":{},\"remark\":\"任务状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":5,\"dictName\":\"任务分组\",\"dictType\":\"sys_job_group\",\"params\":{},\"remark\":\"任务分组列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":6,\"dictName\":\"系统是否\",\"dictType\":\"sys_yes_no\",\"params\":{},\"remark\":\"系统是否列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":7,\"dictName\":\"通知类型\",\"dictType\":\"sys_notice_type\",\"params\":{},\"remark\":\"通知类型列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":8,\"dictName\":\"通知状态\",\"dictType\":\"sys_notice_status\",\"params\":{},\"remark\":\"通知状态列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":9,\"dictName\":\"操作类型\",\"dictType\":\"sys_oper_type\",\"params\":{},\"remark\":\"操作类型列表\",\"status\":\"0\"},{\"createBy\":\"admin\",\"createTime\":1521171180000,\"dictId\":10,\"dictName\":\"系统状态\",\"dictType\":\"sys_common_status\",\"params\":{},\"remark\":\"登录状态列表\",\"status\":\"0\"}],\"total\":11},\"message\":\"操作成功！\",\"success\":true}', 0, NULL, '2021-01-26 13:24:30');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -618,13 +622,14 @@ CREATE TABLE `sys_role`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '超级管理员');
 INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '普通角色');
+INSERT INTO `sys_role` VALUES (3, '来宾', 'guest', 3, '1', 1, 1, '0', '0', '', NULL, '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -745,6 +750,8 @@ INSERT INTO `sys_role_menu` VALUES (2, 1062);
 INSERT INTO `sys_role_menu` VALUES (2, 1063);
 INSERT INTO `sys_role_menu` VALUES (2, 1064);
 INSERT INTO `sys_role_menu` VALUES (2, 1065);
+INSERT INTO `sys_role_menu` VALUES (3, 1);
+INSERT INTO `sys_role_menu` VALUES (3, 105);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -771,13 +778,14 @@ CREATE TABLE `sys_user`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES (1, 103, 'admin', '威特', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'weiter', '威特', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2018-03-16 11:33:00', 'admin', '2018-03-16 11:33:00', 'ry', '2018-03-16 11:33:00', '测试员');
+INSERT INTO `sys_user` VALUES (3, 105, 'guest', '来宾', '00', '', '', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '', NULL, '', NULL, '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -810,5 +818,6 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1);
 INSERT INTO `sys_user_role` VALUES (2, 2);
+INSERT INTO `sys_user_role` VALUES (3, 3);
 
 SET FOREIGN_KEY_CHECKS = 1;

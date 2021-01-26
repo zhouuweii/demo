@@ -3,7 +3,6 @@ package com.zw.admin.framework.core.handler;
 import com.zw.admin.framework.common.exceptions.BaseException;
 import com.zw.admin.framework.common.exceptions.CustomException;
 import com.zw.admin.framework.common.exceptions.DemoModeException;
-import com.zw.admin.framework.common.exceptions.PreAuthorizeException;
 import com.zw.admin.framework.common.utils.StringUtils;
 import com.zw.admin.framework.common.web.domain.AjaxResult;
 import org.slf4j.Logger;
@@ -15,8 +14,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 全局异常处理器
- *
- * @author ruoyi
+ * @author: ZhouWei
+ * @create: 2021-01
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -66,15 +65,6 @@ public class GlobalExceptionHandler {
         log.error(e.getMessage(), e);
         String message = e.getBindingResult().getFieldError().getDefaultMessage();
         return AjaxResult.error(message);
-    }
-
-    /**
-     * 权限异常
-     */
-    @ExceptionHandler(PreAuthorizeException.class)
-    public AjaxResult preAuthorizeException(PreAuthorizeException e) {
-        System.out.println("没有权限，请联系管理员授权1111111111");
-        return AjaxResult.error("没有权限，请联系管理员授权");
     }
 
     /**

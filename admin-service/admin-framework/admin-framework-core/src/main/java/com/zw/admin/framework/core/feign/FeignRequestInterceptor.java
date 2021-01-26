@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * feign 请求拦截器
- *
- * @author ruoyi
+ * Feign 请求拦截器
+ * @author: ZhouWei
+ * @create: 2021-01
  */
 @Component
 public class FeignRequestInterceptor implements RequestInterceptor {
