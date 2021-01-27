@@ -69,7 +69,7 @@ public class DictDataServiceImpl implements DictDataService {
     }
 
     /**
-     * 新增保存字典数据信息
+     * 新增字典数据信息
      *
      * @param dictData 字典数据信息
      * @return 结果
@@ -84,7 +84,7 @@ public class DictDataServiceImpl implements DictDataService {
     }
 
     /**
-     * 修改保存字典数据信息
+     * 修改字典数据信息
      *
      * @param dictData 字典数据信息
      * @return 结果

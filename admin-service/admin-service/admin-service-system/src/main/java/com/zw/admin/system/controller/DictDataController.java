@@ -9,6 +9,9 @@ import com.zw.admin.framework.common.utils.StringUtils;
 import com.zw.admin.framework.common.utils.poi.ExcelUtil;
 import com.zw.admin.framework.common.web.controller.BaseController;
 import com.zw.admin.framework.common.web.domain.AjaxResult;
+import com.zw.admin.framework.core.annotation.Log;
+import com.zw.admin.framework.core.annotation.PreAuthorize;
+import com.zw.admin.framework.core.enums.BusinessType;
 import com.zw.admin.framework.domain.entity.SysDictData;
 import com.zw.admin.system.service.DictDataService;
 import com.zw.admin.system.service.DictTypeService;
@@ -39,7 +42,12 @@ public class DictDataController extends BaseController {
     @Autowired
     private DictTypeService dictTypeService;
 
-//    @PreAuthorize(hasPermi = "system:dict:list")
+    /**
+     * 根据条件分页查询字典数据
+     * @param dictData 字典数据信息
+     * @return 字典数据集合信息
+     */
+    @PreAuthorize(hasPermi = "system:dict:list")
     @ApiOperation("列表查询")
     @GetMapping("/list")
     public ResultData list(SysDictData dictData) {
@@ -48,20 +56,12 @@ public class DictDataController extends BaseController {
         return new ResultData(CommonCode.SUCCESS, new TableResult(list,new PageInfo(list).getTotal()));
     }
 
-//    @Log(title = "字典数据", businessType = BusinessType.EXPORT)
-//    @PreAuthorize(hasPermi = "system:dict:export")
-    @ApiOperation("导出数据")
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, SysDictData dictData) throws IOException {
-        List<SysDictData> list = dictDataService.selectDictDataList(dictData);
-        ExcelUtil<SysDictData> util = new ExcelUtil<SysDictData>(SysDictData.class);
-        util.exportExcel(response, list, "字典数据");
-    }
-
     /**
-     * 查询字典数据详细
+     * 根据字典数据ID查询信息
+     * @param dictCode 字典数据ID
+     * @return 字典数据
      */
-//    @PreAuthorize(hasPermi = "system:dict:query")
+    @PreAuthorize(hasPermi = "system:dict:query")
     @ApiOperation("根据字典数据ID查询信息")
     @GetMapping(value = "/{dictCode}")
     public AjaxResult getInfo(@PathVariable Long dictCode) {
@@ -69,7 +69,9 @@ public class DictDataController extends BaseController {
     }
 
     /**
-     * 根据字典类型查询字典数据信息
+     * 根据字典类型查询字典数据
+     * @param dictType 字典类型
+     * @return 字典数据集合信息
      */
     @ApiOperation("根据字典类型查询字典数据")
     @GetMapping(value = "/type/{dictType}")
@@ -82,37 +84,54 @@ public class DictDataController extends BaseController {
     }
 
     /**
-     * 新增字典类型
+     * 新增字典数据信息
+     * @param dictData 字典数据信息
+     * @return 结果
      */
-//    @PreAuthorize(hasPermi = "system:dict:add")
-//    @Log(title = "字典数据", businessType = BusinessType.INSERT)
-    @ApiOperation("新增保存字典数据信息")
+    @PreAuthorize(hasPermi = "system:dict:add")
+    @Log(title = "字典数据", businessType = BusinessType.INSERT)
+    @ApiOperation("新增字典数据信息")
     @PostMapping
-    public AjaxResult add(@Validated @RequestBody SysDictData dict) {
-        dict.setCreateBy(SecurityUtils.getUsername());
-        return toAjax(dictDataService.insertDictData(dict));
+    public AjaxResult add(@Validated @RequestBody SysDictData dictData) {
+        dictData.setCreateBy(SecurityUtils.getUsername());
+        return toAjax(dictDataService.insertDictData(dictData));
     }
 
     /**
-     * 修改保存字典类型
+     * 修改字典数据信息
+     * @param dictData 字典数据信息
+     * @return 结果
      */
-//    @PreAuthorize(hasPermi = "system:dict:edit")
-//    @Log(title = "字典数据", businessType = BusinessType.UPDATE)
-    @ApiOperation("修改保存字典数据信息")
+    @PreAuthorize(hasPermi = "system:dict:edit")
+    @Log(title = "字典数据", businessType = BusinessType.UPDATE)
+    @ApiOperation("修改字典数据信息")
     @PutMapping
-    public AjaxResult edit(@Validated @RequestBody SysDictData dict) {
-        dict.setUpdateBy(SecurityUtils.getUsername());
-        return toAjax(dictDataService.updateDictData(dict));
+    public AjaxResult edit(@Validated @RequestBody SysDictData dictData) {
+        dictData.setUpdateBy(SecurityUtils.getUsername());
+        return toAjax(dictDataService.updateDictData(dictData));
     }
 
     /**
-     * 删除字典类型
+     * 批量删除字典数据信息
+     * @param dictCodes 需要删除的字典数据ID
+     * @return 结果
      */
-//    @PreAuthorize(hasPermi = "system:dict:remove")
-//    @Log(title = "字典类型", businessType = BusinessType.DELETE)
+    @PreAuthorize(hasPermi = "system:dict:remove")
+    @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @ApiOperation("批量删除字典数据信息")
     @DeleteMapping("/{dictCodes}")
     public AjaxResult remove(@PathVariable Long[] dictCodes) {
         return toAjax(dictDataService.deleteDictDataByIds(dictCodes));
     }
+
+    @Log(title = "字典数据", businessType = BusinessType.EXPORT)
+    @PreAuthorize(hasPermi = "system:dict:export")
+    @ApiOperation("导出数据")
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, SysDictData dictData) throws IOException {
+        List<SysDictData> list = dictDataService.selectDictDataList(dictData);
+        ExcelUtil<SysDictData> util = new ExcelUtil<SysDictData>(SysDictData.class);
+        util.exportExcel(response, list, "字典数据");
+    }
+
 }

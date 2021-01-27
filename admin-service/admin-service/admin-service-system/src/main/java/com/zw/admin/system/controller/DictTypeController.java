@@ -84,7 +84,7 @@ public class DictTypeController extends BaseController {
      * @return 结果
      */
     @PreAuthorize(hasPermi = "system:dict:add")
-//    @Log(title = "字典类型", businessType = BusinessType.INSERT)
+    @Log(title = "字典类型", businessType = BusinessType.INSERT)
     @ApiOperation("新增字典类型")
     @PostMapping
     public AjaxResult add(@Validated @RequestBody SysDictType dict) {
@@ -96,13 +96,13 @@ public class DictTypeController extends BaseController {
     }
 
     /**
-     * 修改保存字典类型信息
+     * 修改字典类型信息
      * @param dict 字典类型信息
      * @return 结果
      */
     @PreAuthorize(hasPermi = "system:dict:edit")
-//    @Log(title = "字典类型", businessType = BusinessType.UPDATE)
-    @ApiOperation("修改保存字典类型信息")
+    @Log(title = "字典类型", businessType = BusinessType.UPDATE)
+    @ApiOperation("修改字典类型信息")
     @PutMapping
     public AjaxResult edit(@Validated @RequestBody SysDictType dict) {
         if (UserConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
@@ -118,7 +118,7 @@ public class DictTypeController extends BaseController {
      * @return 结果
      */
     @PreAuthorize(hasPermi = "system:dict:remove")
-//    @Log(title = "字典类型", businessType = BusinessType.DELETE)
+    @Log(title = "字典类型", businessType = BusinessType.DELETE)
     @ApiOperation("批量删除字典信息")
     @DeleteMapping("/{dictIds}")
     public AjaxResult remove(@PathVariable Long[] dictIds) {
@@ -129,7 +129,7 @@ public class DictTypeController extends BaseController {
      * 清空缓存
      */
     @PreAuthorize(hasPermi = "system:dict:remove")
-//    @Log(title = "字典类型", businessType = BusinessType.CLEAN)
+    @Log(title = "字典类型", businessType = BusinessType.CLEAN)
     @ApiOperation("清空缓存数据")
     @DeleteMapping("/clearCache")
     public AjaxResult clearCache() {
@@ -139,7 +139,7 @@ public class DictTypeController extends BaseController {
 
 
     @PreAuthorize(hasPermi = "system:dict:export")
-    //    @Log(title = "字典类型", businessType = BusinessType.EXPORT)
+    @Log(title = "字典类型", businessType = BusinessType.EXPORT)
     @ApiOperation("导出数据")
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysDictType dictType) throws IOException {

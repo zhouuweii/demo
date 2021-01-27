@@ -112,7 +112,7 @@ public class DictTypeServiceImpl implements DictTypeService {
     }
 
     /**
-     * 修改保存字典类型信息
+     * 修改字典类型信息
      * @param dictType 字典类型信息
      * @return 结果
      */

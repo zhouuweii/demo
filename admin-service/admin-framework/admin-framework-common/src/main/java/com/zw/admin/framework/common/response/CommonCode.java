@@ -52,8 +52,13 @@ public enum CommonCode implements ResponseMain, Serializable {
     DATA_PHONE_CODE_ERROR(false, 4103, "验证码错误"),
 
     DATA_NO_DELETE(false, 4500, "该类型已分配,不能删除"),
-    DATA_ALREADY_EXISTS_DIC(false, 4501, "新增字典失败，该字典类型已存在"),
-    DATA_ALREADY_EXISTS_DIC_UPDATE(false, 4502, "修改字典失败，该字典类型已存在"),
+    DATA_NO_DELETE_USED_POST(false, 4501, "该岗位已分配,不能删除"),
+    DATA_ALREADY_EXISTS_DIC(false, 4601, "新增字典失败，该字典类型已存在"),
+    DATA_ALREADY_EXISTS_POST(false, 4605, "新增失败，该岗位已存在"),
+    DATA_ALREADY_EXISTS_POSTCODE(false, 4605, "新增失败，该岗位编号已存在"),
+    DATA_ALREADY_EXISTS_DIC_UPDATE(false, 4602, "修改字典失败，该字典类型已存在"),
+    DATA_ALREADY_EXISTS_POST_UPDATE(false, 4602, "修改岗位失败，该岗位已存在"),
+    DATA_ALREADY_EXISTS_POST_CODE_UPDATE(false, 4602, "修改岗位编码失败，该岗位编码已存在"),
 
 
 

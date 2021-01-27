@@ -55,7 +55,6 @@ const user = {
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(res => {
-          console.info(res)
           const user = res.data.sysUser
           const avatar = user.avatar == "" ? require("@/assets/images/profile.jpg") : user.avatar;
           if (res.data.roles && res.data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
