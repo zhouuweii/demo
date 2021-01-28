@@ -1,5 +1,6 @@
 package com.zw.admin.system.controller;
 
+import com.zw.admin.framework.common.constant.CacheConstants;
 import com.zw.admin.framework.common.constant.UserConstants;
 import com.zw.admin.framework.common.exception.ExceptionCast;
 import com.zw.admin.framework.common.response.CommonCode;
@@ -13,13 +14,12 @@ import com.zw.admin.framework.common.web.page.TableDataInfo;
 import com.zw.admin.framework.core.annotation.Log;
 import com.zw.admin.framework.core.annotation.PreAuthorize;
 import com.zw.admin.framework.core.enums.BusinessType;
+import com.zw.admin.framework.core.service.RedisTemplateUtil;
 import com.zw.admin.framework.domain.entity.SysRole;
 import com.zw.admin.framework.domain.entity.SysUser;
 import com.zw.admin.framework.domain.model.LoginUser;
-import com.zw.admin.system.service.PermissionService;
-import com.zw.admin.system.service.PostService;
-import com.zw.admin.system.service.RoleService;
-import com.zw.admin.system.service.UserService;
+import com.zw.admin.framework.domain.request.Register;
+import com.zw.admin.system.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +54,12 @@ public class UserController extends BaseController {
 
     @Autowired
     private PermissionService permissionService;
+
+    @Autowired
+    private VerifyService verifyService;
+
+    @Autowired
+    private RedisTemplateUtil redisTemplateUtil;
 
     @PreAuthorize(hasPermi = "system:user:list")
     @ApiOperation("获取用户列表")
@@ -158,16 +164,40 @@ public class UserController extends BaseController {
         if (UserConstants.NOT_UNIQUE.equals(userService.checkUserNameUnique(user.getUserName()))) {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
         } else if (StringUtils.isNotEmpty(user.getPhonenumber())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+                && !userService.checkPhoneUnique(user.getPhonenumber())) {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，手机号码已存在");
         } else if (StringUtils.isNotEmpty(user.getEmail())
                 && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
             return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
         user.setCreateBy(SecurityUtils.getUsername());
-//        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         user.setPassword(user.getPassword());
         return toAjax(userService.insertUser(user));
+    }
+
+    @ApiOperation("用户注册")
+    @PostMapping("/register")
+    public ResultData register(@Validated @RequestBody Register register) {
+        //校验验证码
+        Boolean success = verifyService.checkSmsCode(register.getPhone(), register.getCode(), register.getSmsId());
+        redisTemplateUtil.deleteObject(CacheConstants.SMS_CODE_KEY + register.getPhone() + "-" + register.getSmsId());
+        if(success){
+            //封装用户信息
+            SysUser sysUser =new SysUser();
+            sysUser.setUserName(register.getUsername());
+            sysUser.setPassword(SecurityUtils.encryptPassword(register.getPassword()));
+            sysUser.setPhonenumber(register.getPhone());
+            sysUser.setCreateBy("自主注册");
+            sysUser.setStatus("0");
+            //新增用户
+            userService.insertUser(sysUser);
+            return new ResultData(CommonCode.SUCCESS,sysUser);
+        }else{
+            ExceptionCast.cast(CommonCode.DATA_PHONE_CODE_ERROR);
+        }
+        ExceptionCast.cast(CommonCode.REGISTER_ERROR);
+        return null;
     }
 
     @PreAuthorize(hasPermi = "system:user:edit")
@@ -177,7 +207,7 @@ public class UserController extends BaseController {
     public AjaxResult edit(@Validated @RequestBody SysUser user) {
         userService.checkUserAllowed(user);
         if (StringUtils.isNotEmpty(user.getPhonenumber())
-                && UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user))) {
+                && !userService.checkPhoneUnique(user.getPhonenumber())) {
             return AjaxResult.error("修改用户'" + user.getUserName() + "'失败，手机号码已存在");
         } else if (StringUtils.isNotEmpty(user.getEmail())
                 && UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user))) {
@@ -202,7 +232,7 @@ public class UserController extends BaseController {
     @PutMapping("/resetPwd")
     public AjaxResult resetPwd(@RequestBody SysUser user) {
         userService.checkUserAllowed(user);
-//        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
+        user.setPassword(SecurityUtils.encryptPassword(user.getPassword()));
         user.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(userService.resetPwd(user));
     }

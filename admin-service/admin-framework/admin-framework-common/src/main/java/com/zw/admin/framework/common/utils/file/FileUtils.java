@@ -25,7 +25,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 输出指定文件的byte数组
-     *
      * @param filePath 文件路径
      * @param os 输出流
      * @return
@@ -65,7 +64,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 删除文件
-     *
      * @param filePath 文件
      * @return
      */
@@ -82,7 +80,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 文件名称验证
-     *
      * @param filename 文件名称
      * @return true 正常 false 非法
      */
@@ -92,7 +89,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 检查文件是否可下载
-     *
      * @param resource 需要下载的文件
      * @return true 正常 false 非法
      */
@@ -113,7 +109,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 下载文件名重新编码
-     *
      * @param request 请求对象
      * @param fileName 文件名
      * @return 编码后的文件名
@@ -140,7 +135,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 返回文件名
-     *
      * @param filePath 文件
      * @return 文件名
      */
@@ -174,7 +168,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
     /**
      * 是否为Windows或者Linux（Unix）文件分隔符<br>
      * Windows平台下分隔符为\，Linux（Unix）为/
-     *
      * @param c 字符
      * @return 是否为Windows或者Linux（Unix）文件分隔符
      */
@@ -184,7 +177,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 下载文件名重新编码
-     *
      * @param response 响应对象
      * @param realFileName 真实文件名
      * @return
@@ -205,7 +197,6 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 
     /**
      * 百分号编码工具方法
-     *
      * @param s 需要百分号编码的字符串
      * @return 百分号编码后的字符串
      */

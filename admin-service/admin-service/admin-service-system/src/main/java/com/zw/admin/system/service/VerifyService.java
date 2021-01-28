@@ -3,11 +3,11 @@ package com.zw.admin.system.service;
 import java.util.Map;
 
 /**
- * 其他接口
+ * 验证码相关
  * @author: ZhouWei
  * @create: 2021-01
  **/
-public interface OtherService {
+public interface VerifyService {
 
     /**
      * 获取验证码

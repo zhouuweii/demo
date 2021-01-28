@@ -88,10 +88,10 @@ public interface UserMapper {
 
     /**
      * 校验手机号码是否唯一
-     * @param phonenumber 手机号码
+     * @param phoneNumber 手机号码
      * @return 结果
      */
-    public SysUser checkPhoneUnique(String phonenumber);
+    public Integer checkPhoneUnique(String phoneNumber);
 
     /**
      * 校验email是否唯一

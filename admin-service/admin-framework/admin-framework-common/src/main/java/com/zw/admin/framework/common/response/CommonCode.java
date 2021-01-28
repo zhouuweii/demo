@@ -44,6 +44,7 @@ public enum CommonCode implements ResponseMain, Serializable {
     GET_PHONE_CODE_ERROR(false, 4001, "获取手机验证码失败"),
     GET_PHONE_CODE_OFTEN(false, 4002, "发送短信频繁，请稍后再试"),
     INSERT_ERROR(false, 4003, "新增数据失败"),
+    REGISTER_ERROR(false, 4040, "注册失败，请稍后再试!"),
     UPDATE_ERROR(false, 4003, "更新数据失败"),
 
     //调用成功：但未查询到数据

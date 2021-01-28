@@ -130,7 +130,6 @@ public final class HTMLFilter {
 
     /**
      * Map-parameter configurable constructor.
-     *
      * @param conf map containing configuration. keys match field names.
      */
     @SuppressWarnings("unchecked")
@@ -195,7 +194,6 @@ public final class HTMLFilter {
 
     /**
      * given a user submitted input String, filter out any invalid or restricted html.
-     *
      * @param input text (i.e. submitted by a user) than may contain html
      * @return "clean" version of input, with only valid, whitelisted html elements allowed
      */

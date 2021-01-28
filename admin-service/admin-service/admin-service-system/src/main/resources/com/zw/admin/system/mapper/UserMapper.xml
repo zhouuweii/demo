@@ -183,7 +183,7 @@
 
     <!--校验手机号码是否唯一-->
     <select id="checkPhoneUnique" parameterType="String" resultMap="SysUserResult">
-        select user_id, phonenumber from sys_user where phonenumber = #{phonenumber} limit 1
+        SELECT count(1)  FROM sys_user WHERE phonenumber = #{phoneNumber}
     </select>
 
     <!--校验email是否唯一-->

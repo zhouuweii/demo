@@ -20,6 +20,7 @@ import java.net.NetworkInterface;
  * @create: 2021-01
  */
 public class IdWorker {
+
     /**时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）*/
     private final static long twepoch = 1288834974657L;
     /**机器标识位数*/
@@ -53,7 +54,6 @@ public class IdWorker {
     }
 
     /**
-     *
      * @param workerId 工作机器ID
      * @param datacenterId 序列号
      * @return
@@ -92,7 +92,6 @@ public class IdWorker {
     }
 
     /**
-     *
      * @param maxDatacenterId
      * @return long
      **/

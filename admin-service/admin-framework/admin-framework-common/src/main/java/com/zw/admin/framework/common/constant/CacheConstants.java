@@ -28,6 +28,13 @@ public class CacheConstants {
     /**字典管理 cache key*/
     public static final String SYS_DICT_KEY = "sys_dict:";
 
-    /**字典管理 cache key*  1天*/
+    /**字典管理 缓存时间*/
     public static final Long SYS_DICT_KEY_TIME = 60*2L;
+
+    /**短信验证码 key*/
+    public static final String SMS_CODE_KEY = "smsCode:";
+
+    /**短信验证码 缓存时间*/
+    public static final Long SMS_CODE_TIME = 60*5L;
+
 }

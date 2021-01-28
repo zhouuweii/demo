@@ -27,7 +27,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 初始化一个新创建的 AjaxResult 对象
-     *
      * @param code 状态码
      * @param msg 返回内容
      */
@@ -38,7 +37,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 初始化一个新创建的 AjaxResult 对象
-     *
      * @param code 状态码
      * @param msg 返回内容
      * @param data 数据对象
@@ -71,7 +69,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 返回成功消息
-     *
      * @param msg 返回内容
      * @return 成功消息
      */
@@ -81,7 +78,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 返回成功消息
-     *
      * @param msg 返回内容
      * @param data 数据对象
      * @return 成功消息
@@ -101,7 +97,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 返回错误消息
-     *
      * @param msg 返回内容
      * @return 警告消息
      */
@@ -111,7 +106,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 返回错误消息
-     *
      * @param msg 返回内容
      * @param data 数据对象
      * @return 警告消息
@@ -122,7 +116,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 返回错误消息
-     *
      * @param code 状态码
      * @param msg 返回内容
      * @return 警告消息
@@ -133,7 +126,6 @@ public class AjaxResult extends HashMap<String, Object> {
 
     /**
      * 方便链式调用
-     *
      * @param key
      * @param value
      * @return

@@ -44,7 +44,6 @@ public class ImageUtils {
 
     /**
      * 读取文件为字节数据
-     *
      * @param key 地址
      * @return 字节数据
      */

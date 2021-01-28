@@ -96,7 +96,6 @@ public class TokenService {
 
     /**
      * 刷新令牌有效期
-     *
      * @param loginUser 登录信息
      */
     public void refreshToken(LoginUser loginUser) {

@@ -20,7 +20,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
 
     /**
      * 私有构造
-     *
      * @param data 数据
      */
     private UUID(byte[] data) {
@@ -39,7 +38,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
 
     /**
      * 使用指定的数据构造新的 UUID。
-     *
      * @param mostSigBits 用于 {@code UUID} 的最高有效 64 位
      * @param leastSigBits 用于 {@code UUID} 的最低有效 64 位
      */
@@ -68,7 +66,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
 
     /**
      * 获取类型 4（伪随机生成的）UUID 的静态工厂。 使用加密的强伪随机数生成器生成该 UUID。
-     *
      * @param isSecure 是否使用{@link SecureRandom}如果是可以获得更安全的随机码，否则可以得到更好的性能
      * @return 随机生成的 {@code UUID}
      */
@@ -86,7 +83,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
 
     /**
      * 根据指定的字节数组获取类型 3（基于名称的）UUID 的静态工厂。
-     *
      * @param name 用于构造 UUID 的字节数组。
      *
      * @return 根据指定数组生成的 {@code UUID}
@@ -108,7 +104,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
 
     /**
      * 根据 {@link #toString()} 方法中描述的字符串标准表示形式创建{@code UUID}。
-     *
      * @param name 指定 {@code UUID} 字符串
      * @return 具有指定值的 {@code UUID}
      * @throws IllegalArgumentException 如果 name 与 {@link #toString} 中描述的字符串表示形式不符抛出此异常
@@ -138,7 +133,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
 
     /**
      * 返回指定数字对应的hex值
-     *
      * @param val 值
      * @param digits 位
      * @return 值
@@ -334,7 +328,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
      * </pre>
      *
      * </blockquote>
-     *
      * @param isSimple 是否简单模式，简单模式为不带'-'的UUID字符串
      * @return 此{@code UUID} 的字符串表现形式
      */
@@ -386,7 +379,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
      * 将此对象与指定对象比较。
      * <p>
      * 当且仅当参数不为 {@code null}、而是一个 UUID 对象、具有与此 UUID 相同的 varriant、包含相同的值（每一位均相同）时，结果才为 {@code true}。
-     *
      * @param obj 要与之比较的对象
      *
      * @return 如果对象相同，则返回 {@code true}；否则返回 {@code false}
@@ -405,7 +397,6 @@ public final class UUID implements java.io.Serializable, Comparable<UUID> {
      *
      * <p>
      * 如果两个 UUID 不同，且第一个 UUID 的最高有效字段大于第二个 UUID 的对应字段，则第一个 UUID 大于第二个 UUID。
-     *
      * @param val 与此 UUID 比较的 UUID
      *
      * @return 在此 UUID 小于、等于或大于 val 时，分别返回 -1、0 或 1。

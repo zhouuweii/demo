@@ -64,7 +64,6 @@ public final class Base64 {
 
     /**
      * Encodes hex octects into Base64
-     *
      * @param binaryData Array containing binaryData
      * @return Encoded Base64 array
      */
@@ -136,7 +135,6 @@ public final class Base64 {
 
     /**
      * Decodes Base64 data into octects
-     *
      * @param encoded string containing Base64 data
      * @return Array containind decoded data.
      */
@@ -231,7 +229,6 @@ public final class Base64 {
 
     /**
      * remove WhiteSpace from MIME containing encoded Base64 data.
-     *
      * @param data the byte array of base64 data (with WS)
      * @return the new length
      */

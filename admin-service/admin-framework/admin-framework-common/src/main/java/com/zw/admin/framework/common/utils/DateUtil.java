@@ -12,6 +12,7 @@ import java.util.SimpleTimeZone;
  * @create: 2021-01
  **/
 public class DateUtil {
+
     public final static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     /**

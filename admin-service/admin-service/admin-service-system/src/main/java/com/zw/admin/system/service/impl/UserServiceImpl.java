@@ -2,9 +2,11 @@ package com.zw.admin.system.service.impl;
 
 import com.zw.admin.framework.common.constant.UserConstants;
 import com.zw.admin.framework.common.exceptions.CustomException;
+import com.zw.admin.framework.common.utils.SecurityUtils;
 import com.zw.admin.framework.common.utils.StringUtils;
 import com.zw.admin.framework.domain.entity.*;
 import com.zw.admin.system.mapper.*;
+import com.zw.admin.system.service.ConfigService;
 import com.zw.admin.system.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,8 +42,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserPostMapper userPostMapper;
 
-//    @Autowired
-//    private ConfigService configService;
+    @Autowired
+    private ConfigService configService;
 
     /**
      * 根据条件分页查询用户列表
@@ -122,7 +124,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 新增保存用户信息
+     * 新增用户信息
      * @param user 用户信息
      * @return 结果
      */
@@ -300,18 +302,18 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 校验用户名称是否唯一
-     * @param user 用户信息
-     * @return
+     * 校验手机号码是否唯一
+     * @param userPhone 手机号码是
+     * @return 结果  true：唯一  false：已存在
      */
     @Override
-    public String checkPhoneUnique(SysUser user) {
-        Long userId = StringUtils.isNull(user.getUserId()) ? -1L : user.getUserId();
-        SysUser info = userMapper.checkPhoneUnique(user.getPhonenumber());
-        if (StringUtils.isNotNull(info) && info.getUserId().longValue() != userId.longValue()) {
-            return UserConstants.NOT_UNIQUE;
+    public Boolean checkPhoneUnique(String userPhone) {
+        Integer rows = userMapper.checkPhoneUnique(userPhone);
+        if (rows ==null ||rows > 0 ) {
+            return false;
+        } else {
+            return true;
         }
-        return UserConstants.UNIQUE;
     }
 
     /**
@@ -338,47 +340,46 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName) {
-//        if (StringUtils.isNull(userList) || userList.size() == 0) {
-//            throw new CustomException("导入用户数据不能为空！");
-//        }
-//        int successNum = 0;
-//        int failureNum = 0;
-//        StringBuilder successMsg = new StringBuilder();
-//        StringBuilder failureMsg = new StringBuilder();
-//        String password = configService.selectConfigByKey("sys.user.initPassword");
-//        for (SysUser user : userList) {
-//            try {
-//                // 验证是否存在这个用户
-//                SysUser u = userMapper.selectUserByUserName(user.getUserName());
-//                if (StringUtils.isNull(u)) {
-//                    user.setPassword(SecurityUtils.encryptPassword(password));
-//                    user.setCreateBy(operName);
-//                    this.insertUser(user);
-//                    successNum++;
-//                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 导入成功");
-//                } else if (isUpdateSupport) {
-//                    user.setUpdateBy(operName);
-//                    this.updateUser(user);
-//                    successNum++;
-//                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 更新成功");
-//                } else {
-//                    failureNum++;
-//                    failureMsg.append("<br/>" + failureNum + "、账号 " + user.getUserName() + " 已存在");
-//                }
-//            } catch (Exception e) {
-//                failureNum++;
-//                String msg = "<br/>" + failureNum + "、账号 " + user.getUserName() + " 导入失败：";
-//                failureMsg.append(msg + e.getMessage());
-//                log.error(msg, e);
-//            }
-//        }
-//        if (failureNum > 0) {
-//            failureMsg.insert(0, "很抱歉，导入失败！共 " + failureNum + " 条数据格式不正确，错误如下：");
-//            throw new CustomException(failureMsg.toString());
-//        } else {
-//            successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
-//        }
-//        return successMsg.toString();
-        return null;
+        if (StringUtils.isNull(userList) || userList.size() == 0) {
+            throw new CustomException("导入用户数据不能为空！");
+        }
+        int successNum = 0;
+        int failureNum = 0;
+        StringBuilder successMsg = new StringBuilder();
+        StringBuilder failureMsg = new StringBuilder();
+        String password = configService.selectConfigByKey("sys.user.initPassword");
+        for (SysUser user : userList) {
+            try {
+                // 验证是否存在这个用户
+                SysUser u = userMapper.selectUserByUserName(user.getUserName());
+                if (StringUtils.isNull(u)) {
+                    user.setPassword(SecurityUtils.encryptPassword(password));
+                    user.setCreateBy(operName);
+                    this.insertUser(user);
+                    successNum++;
+                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 导入成功");
+                } else if (isUpdateSupport) {
+                    user.setUpdateBy(operName);
+                    this.updateUser(user);
+                    successNum++;
+                    successMsg.append("<br/>" + successNum + "、账号 " + user.getUserName() + " 更新成功");
+                } else {
+                    failureNum++;
+                    failureMsg.append("<br/>" + failureNum + "、账号 " + user.getUserName() + " 已存在");
+                }
+            } catch (Exception e) {
+                failureNum++;
+                String msg = "<br/>" + failureNum + "、账号 " + user.getUserName() + " 导入失败：";
+                failureMsg.append(msg + e.getMessage());
+                log.error(msg, e);
+            }
+        }
+        if (failureNum > 0) {
+            failureMsg.insert(0, "很抱歉，导入失败！共 " + failureNum + " 条数据格式不正确，错误如下：");
+            throw new CustomException(failureMsg.toString());
+        } else {
+            successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
+        }
+        return successMsg.toString();
     }
 }

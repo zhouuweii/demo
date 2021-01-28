@@ -126,10 +126,10 @@ public interface UserService {
 
     /**
      * 校验手机号码是否唯一
-     * @param user 用户信息
-     * @return 结果
+     * @param userPhone 手机号码是
+     * @return 结果  true：唯一  false：已存在
      */
-    public String checkPhoneUnique(SysUser user);
+    public Boolean checkPhoneUnique(String userPhone);
 
     /**
      * 校验email是否唯一

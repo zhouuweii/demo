@@ -11,6 +11,7 @@ import java.util.*;
  **/
 @Component
 public class MyCollectionUtil {
+
     /**
      * 随机抽取List集合中特定个数的元素
      * @param list 数据列表
@@ -28,7 +29,7 @@ public class MyCollectionUtil {
             backSum = list.size();
         }
         for (int i = 0; i < backSum; i++) {
-//			随机数的范围为0-list.size()-1
+			//随机数的范围为0-list.size()-1
             int target = random.nextInt(list.size());
             backList.add(list.get(target));
             list.remove(target);

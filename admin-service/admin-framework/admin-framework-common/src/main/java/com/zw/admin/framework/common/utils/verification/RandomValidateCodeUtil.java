@@ -67,7 +67,7 @@ public class RandomValidateCodeUtil {
             randomString = drawString(graphics, randomString, i);
         }
         result.put("code", randomString);
-        System.out.println(randomString);
+//        System.out.println(randomString);
         graphics.dispose();
         try {
             if (isStream) {

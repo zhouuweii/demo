@@ -13,7 +13,7 @@ public class LoginBody {
     /**用户密码*/
     private String password;
 
-    /***/
+    /**验证码*/
     private String code;
 
     /**验证码 唯一标识*/
