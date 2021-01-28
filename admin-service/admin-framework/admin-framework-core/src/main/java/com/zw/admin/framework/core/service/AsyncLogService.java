@@ -1,6 +1,6 @@
 package com.zw.admin.framework.core.service;
 
-import com.zw.admin.framework.api.service.RemoteLogService;
+import com.zw.admin.framework.core.client.SystemClient;
 import com.zw.admin.framework.domain.entity.SysOperLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class AsyncLogService {
 
     @Autowired
-    private RemoteLogService remoteLogService;
+    private SystemClient systemClient;
 
     /**
      * 异步保存系统日志记录
@@ -23,8 +23,7 @@ public class AsyncLogService {
      * @return void
      **/
     @Async
-    public void saveSysLog(SysOperLog sysOperLog)
-    {
-        remoteLogService.saveLog(sysOperLog);
+    public void saveSysLog(SysOperLog sysOperLog) {
+        systemClient.saveLog(sysOperLog);
     }
 }

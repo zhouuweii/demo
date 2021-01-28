@@ -16,7 +16,6 @@
         <module>../../admin-service/admin-service-auth</module>
         <module>../../admin-service/admin-service-gateway</module>
         <module>../../admin-service/admin-service-system</module>
-        <module>../admin-framework-api</module>
     </modules>
 
     <properties>

@@ -1,13 +1,13 @@
 package com.zw.admin.auth.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.zw.admin.auth.client.UserClient;
 import com.zw.admin.auth.service.AuthService;
 import com.zw.admin.framework.common.constant.CacheConstants;
 import com.zw.admin.framework.common.exception.ExceptionCast;
 import com.zw.admin.framework.common.response.ResultData;
 import com.zw.admin.framework.common.utils.ServletUtils;
 import com.zw.admin.framework.common.utils.ip.IpUtils;
+import com.zw.admin.framework.core.client.SystemClient;
 import com.zw.admin.framework.core.service.RedisTemplateUtil;
 import com.zw.admin.framework.domain.code.AuthCode;
 import com.zw.admin.framework.domain.model.AuthToken;
@@ -42,7 +42,7 @@ public class AuthServiceImpl implements AuthService {
     private String ServerPort;
 
     @Autowired
-    private UserClient userClient;
+    private SystemClient userClient;
 
     @Autowired
     private RestTemplate restTemplate;

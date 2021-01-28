@@ -1,6 +1,8 @@
 package com.zw.admin.auth;
 
+import com.zw.admin.framework.core.annotation.EnableCustomConfig;
 import com.zw.admin.framework.core.annotation.EnableRyFeignClients;
+import com.zw.admin.framework.core.client.SystemClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -16,9 +18,9 @@ import org.springframework.web.client.RestTemplate;
  * @author: ZhouWei
  * @create: 2021-01
  **/
-
+@EnableCustomConfig
 @EnableRyFeignClients
-@EnableFeignClients(basePackages = {"com.zw.admin.*"})
+@EnableFeignClients(basePackages = {"com.zw.admin"})
 @EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.zw.admin"})
 @SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})

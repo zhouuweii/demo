@@ -24,11 +24,6 @@
             <artifactId>admin-framework-domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.zw.admin</groupId>
-            <artifactId>admin-framework-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>

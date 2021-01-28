@@ -22,8 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @create: 2021-01
  */
 @Component
-public class TokenService
-{
+public class TokenService {
 
     @Autowired
     private RedisTemplateUtil redisService;
@@ -37,8 +36,7 @@ public class TokenService
     /**
      * 创建令牌
      */
-    public Map<String, Object> createToken(LoginUser loginUser)
-    {
+    public Map<String, Object> createToken(LoginUser loginUser) {
         // 生成token
         String token = IdUtils.fastUUID();
         loginUser.setToken(token);
@@ -60,8 +58,7 @@ public class TokenService
      *
      * @return 用户信息
      */
-    public LoginUser getLoginUser()
-    {
+    public LoginUser getLoginUser() {
         return getLoginUser(ServletUtils.getRequest());
     }
 
@@ -70,12 +67,10 @@ public class TokenService
      *
      * @return 用户信息
      */
-    public LoginUser getLoginUser(HttpServletRequest request)
-    {
+    public LoginUser getLoginUser(HttpServletRequest request) {
         // 获取请求携带的令牌
         String token = SecurityUtils.getToken(request);
-        if (StringUtils.isNotEmpty(token))
-        {
+        if (StringUtils.isNotEmpty(token)) {
             String userKey = getTokenKey(token);
             LoginUser user = redisService.getCacheObject(userKey);
             return user;
@@ -86,18 +81,14 @@ public class TokenService
     /**
      * 设置用户身份信息
      */
-    public void setLoginUser(LoginUser loginUser)
-    {
-        if (StringUtils.isNotNull(loginUser) && StringUtils.isNotEmpty(loginUser.getToken()))
-        {
+    public void setLoginUser(LoginUser loginUser) {
+        if (StringUtils.isNotNull(loginUser) && StringUtils.isNotEmpty(loginUser.getToken())) {
             refreshToken(loginUser);
         }
     }
 
-    public void delLoginUser(String token)
-    {
-        if (StringUtils.isNotEmpty(token))
-        {
+    public void delLoginUser(String token) {
+        if (StringUtils.isNotEmpty(token)) {
             String userKey = getTokenKey(token);
             redisService.deleteObject(userKey);
         }
@@ -108,8 +99,7 @@ public class TokenService
      *
      * @param loginUser 登录信息
      */
-    public void refreshToken(LoginUser loginUser)
-    {
+    public void refreshToken(LoginUser loginUser) {
         loginUser.setLoginTime(System.currentTimeMillis());
         loginUser.setExpireTime(loginUser.getLoginTime() + EXPIRE_TIME * MILLIS_SECOND);
         // 根据uuid将loginUser缓存
@@ -117,8 +107,7 @@ public class TokenService
         redisService.setCacheObject(userKey, loginUser, EXPIRE_TIME, TimeUnit.SECONDS);
     }
 
-    private String getTokenKey(String token)
-    {
+    private String getTokenKey(String token) {
         return ACCESS_TOKEN + token;
     }
 }

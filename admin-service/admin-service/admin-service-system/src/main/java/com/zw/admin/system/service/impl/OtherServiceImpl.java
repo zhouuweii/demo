@@ -37,4 +37,14 @@ public class OtherServiceImpl implements OtherService {
         return result;
     }
 
+    @Override
+    public String getSmsCode(String phone) {
+        return null;
+    }
+
+    @Override
+    public Boolean checkSmsCode(String phone, String code, String smsId) {
+        return null;
+    }
+
 }

@@ -1,8 +1,8 @@
 package com.zw.admin.auth.config;
 
-import com.zw.admin.auth.client.UserClient;
 import com.zw.admin.auth.domain.UserJwt;
 import com.zw.admin.framework.common.response.ResultData;
+import com.zw.admin.framework.core.client.SystemClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -32,7 +32,7 @@ public class UserDetailsConfig implements UserDetailsService {
     private ClientDetailsService clientDetailsService;
 
     @Autowired
-    private UserClient userClient;
+    private SystemClient userClient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

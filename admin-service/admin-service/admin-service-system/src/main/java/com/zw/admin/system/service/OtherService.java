@@ -16,4 +16,19 @@ public interface OtherService {
      **/
     Map<String,String> getCodeChar (String type);
 
+    /**
+     * 获取手机短信验证码
+     * @param phone 手机号码
+     * @return 验证码唯一标识
+     **/
+    public String getSmsCode(String phone);
+
+    /**
+     * 校验手机短信验证码
+     * @param phone 手机号码
+     * @param code 手机验证码
+     * @param smsId 验证码唯一标识
+     * @return java.lang.Boolean
+     **/
+    public Boolean checkSmsCode(String phone,String code,String smsId);
 }
