@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ import java.util.Map;
  **/
 @Api(tags="验证中心",description = "提供验证码等相关操作")
 @RestController
-@RequestMapping("/verification")
+@RequestMapping("/verify")
 public class VerifyController {
 
     @Autowired
@@ -44,8 +45,8 @@ public class VerifyController {
      * @return 验证码唯一标识
      **/
     @ApiOperation("获取手机短信验证码-注册账号")
-    @GetMapping("/getRegisterSmsCode")
-    public ResultData getRegisterSmsCode(String phone){
+    @GetMapping("/getRegisterSmsCode/{phone}")
+    public ResultData getRegisterSmsCode(@PathVariable("phone") String phone){
         Boolean exist = userService.checkPhoneUnique(phone);
         if (!exist){
             String smsId = verifyService.getSmsCode(phone);
@@ -61,8 +62,8 @@ public class VerifyController {
      * @return 验证码唯一标识
      **/
     @ApiOperation("获取手机短信验证码")
-    @GetMapping("/getSmsCode")
-    public ResultData getSmsCode(String phone){
+    @GetMapping("/getSmsCode/{phone}")
+    public ResultData getSmsCode(@PathVariable("phone") String phone){
         String smsId = verifyService.getSmsCode(phone);
         return new ResultData(CommonCode.SUCCESS,smsId);
     }
@@ -75,8 +76,8 @@ public class VerifyController {
      * @return java.lang.Boolean
      **/
     @ApiOperation("校验手机短信验证码")
-    @GetMapping("/checkSmsCode")
-    public ResultData checkSmsCode(String phone,String code,String smsId){
+    @GetMapping("/checkSmsCode/{phone}/{code}/{smsId}")
+    public ResultData checkSmsCode(@PathVariable("phone") String phone,@PathVariable("code") String code,@PathVariable("smsId")String smsId){
         Boolean result = verifyService.checkSmsCode(phone, code, smsId);
         return new ResultData(CommonCode.SUCCESS,result);
     }

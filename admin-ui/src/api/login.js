@@ -4,12 +4,22 @@ const client_id = 'web'
 const client_secret = '123456'
 const scope = 'server'
 
-// 登录方法
+// 登录
 export function login(username, password, code, uuid) {
   return request({
     url: '/auth/login',
     method: 'post',
     data: {username, password, code, uuid}
+  })
+}
+
+// 注册号
+export function register(data) {
+  console.info(data)
+  return request({
+    url: '/system/user/register',
+    method: 'post',
+    data: data
   })
 }
 
@@ -40,7 +50,16 @@ export function logout() {
 // 获取验证码
 export function getCodeImg() {
   return request({
-    url: '/system/verification/getCodeChar',
+    url: '/system/verify/getCodeChar',
+    method: 'get'
+  })
+}
+
+// 获取短信验证码
+export function getSmsCode(phone) {
+  console.info(phone)
+  return request({
+    url: '/system/verify/getRegisterSmsCode/' + phone,
     method: 'get'
   })
 }
